@@ -22,8 +22,6 @@ headers = {
 }
 
 
-
-
 # For Professors
 
 # for i in range(0, 34):
@@ -54,62 +52,7 @@ headers = {
 #     o = o + 1
 
 
-
-
-# For Departments (Best Option) Requires a file-departments.txt
-
-# url = "/Users/andy/Desktop/departments.txt"
-# page = open(url)
-# soup = BeautifulSoup(page.read(), "lxml")
-# # print(soup.prettify())
-#     # soup = BeautifulSoup(fp, 'html.parser')
-#     # r = requests.get(url, headers=headers)
-# #     soup = BeautifulSoup(fp, "lxml")
-# #
-# subjects = soup.select(selector=".subj_id")
-# # print(subjects)
-# subjects = subjects[0].find_all("option")
-#
-# p = 0
-# for s in subjects:
-#     subjecta = s.getText()
-#     course = Subject(subject=subjecta)
-#     course.save()
-#     # print(subjecta)
-#     p = p + 1
-
-
-
-
-
-
-
-# For Departments from a different ccsu website
-
-# url = "https://www2.ccsu.edu/academics/undergrad"
-# r = requests.get(url, headers=headers)
-# soup = BeautifulSoup(r.text, "lxml")
-#
-# subjects = soup.select(selector=".program_listing")
-# print(subjects)
-# subjects = subjects[0].find_all("span", {"class": "program_name"})
-
-# p = 0
-# for s in subjects:
-#     subjecta = subjects[p].getText()
-#     subjecta = subjecta.replace(' BA', '')
-#     subjecta = subjecta.replace(' BS', '')
-#     subjecta = subjecta.replace(' BFA', '')
-#     subjecta = subjecta.replace(' BGA', '')
-#     course = Subject(subject=subjecta)
-#     course.save()
-#     # print(subjecta)
-#     p = p + 1
-
-
-
-
-# For Departments from another different ccsu website
+# For Departments 
 
 # url = "https://ccsu.smartcatalogiq.com/en/current/Undergraduate-Graduate-Catalog/Undergraduate-Majors"
 # r = requests.get(url, headers=headers)
@@ -127,10 +70,6 @@ headers = {
 #     course.save()
 #     # print(subjecta)
 #     p = p + 1
-
-
-
-
 
 
 # For Courses
