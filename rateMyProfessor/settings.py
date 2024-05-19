@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'base.apps.BaseConfig', #our base folder
-    'accounts'
+    'accounts',
+    'profanity',
 
 ]
 

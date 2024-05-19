@@ -34,7 +34,9 @@ a:visited {
 }
 
 
-
+#background-image {
+    background-image: url('images/ccsudark.png');
+}
 
 
 #search-card {

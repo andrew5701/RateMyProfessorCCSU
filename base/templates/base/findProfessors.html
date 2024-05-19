@@ -1,0 +1,40 @@
+{% extends 'main.html' %}
+{% block content %}
+    {% if search_item != "" %}
+        <h1 class="m-5 text-light"> Results for "{{ search_item }}" : </h1>
+    {% else %}
+        <h1 class="text-light"> All Professors </h1>
+    {% endif %}
+
+    <div class="container">
+        {% for professor in professors %}
+            <div class="row mb-3">
+                <div class="col-12 col-md-9">
+                    <div class="card shadow-lg bg-dark text-light">
+                        <div class="card-body">
+                            <h2 class="card-title"><a href="{% url 'professorview' professor.id %}" class="text-light">{{ professor.name }}</a></h2>
+                            <p class="card-text text-muted">Department: {{ professor.department }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-md-3">
+                    <div class="card shadow-lg bg-dark text-light">
+                        <div class="card-body">
+                            <h5 class="card-text">Rating: {{ professor.rating }} 
+                                <span style="color:#fbec5d;">
+                                    {% for _ in '12345' %}
+                                        {% if forloop.counter <= professor.rating %}
+                                            <i class="fa-solid fa-star"></i>
+                                        {% else %}
+                                            <i class="fa-solid fa-star" style="color:white"></i>
+                                        {% endif %}
+                                    {% endfor %}
+                                </span>
+                            </h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}
