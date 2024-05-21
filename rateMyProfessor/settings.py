@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'base.apps.BaseConfig', #our base folder
     'accounts',
-    'profanity',
 
 ]
 
