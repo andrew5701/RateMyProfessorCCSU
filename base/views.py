@@ -9,6 +9,7 @@ from django.contrib.auth import logout
 from django.http import HttpResponseRedirect, JsonResponse
 # from profanity.validators import validate_is_profane
 from django.core.exceptions import ValidationError
+from better_profanity import profanity
 
 
 # Create your views here.
@@ -49,10 +50,13 @@ def register_view(request):
     form = UserCreationForm(request.POST or None)
 
     if request.method == 'POST':
-        # try:
-        #     validate_is_profane(request.POST['username'])
-        # except ValidationError as e:
-        #     return render(request, 'base/signUp.html', {'form': form, 'error_message': str(e).strip('[]').strip("'")})
+
+        try:
+            if profanity.contains_profanity(request.POST['username']):
+                raise ValidationError('Username contains profanity. Change your username.')
+        except ValidationError as e:
+            return render(request, 'base/signUp.html', {'form': form, 'error_message': str(e).strip('[]').strip('\'')})
+        
         
         if form.is_valid():
             form.save()
@@ -115,12 +119,11 @@ def add_review(request, professor_id, user_id):
             courses = Courses.objects.all()
             
             # Check for profanity in the review and heading
-            # try:
-            #     validate_is_profane(review_text)
-            #     validate_is_profane(heading_text)
-            # except ValidationError:
-            #     return render(request, 'base/reviewForm.html', {'form': form, 'professor': professor, 'courses': courses, 'error_message': 'Your review contained inappropriate language. Please revise it.'})
-
+            try:
+                if profanity.contains_profanity(review_text) or profanity.contains_profanity(heading_text):
+                    raise ValidationError('Your review contained inappropriate language. Please revise it.')
+            except ValidationError as e:
+                return render(request, 'base/reviewForm.html', {'form': form, 'professor': professor, 'courses': courses, 'error_message': str(e).strip('[]').strip('\'')})
             
             rate = form.cleaned_data.get('rating')
             if rate == 1.0 and professor.rating != 0.0 and professor.rating >= 0.4:
