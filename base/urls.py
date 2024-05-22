@@ -1,8 +1,13 @@
 from django.urls import path
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
+from django.views.generic.base import RedirectView
+from django.conf import settings
 
 
 urlpatterns = [
+     path('favicon.ico', RedirectView.as_view(url=settings.STATIC_URL + 'favicon.ico')),
     path('', views.base, name="home"), #home url
     path('findProfessors/', views.find_professors, name="findProfessors"),
     path('aboutUs/', views.aboutUs, name="aboutUs"),
@@ -23,6 +28,7 @@ urlpatterns = [
     path('departmentProfessors/<int:department_id>', views.department_professors, name='departmentpr'),
 
 
-]
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
-
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
